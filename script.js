@@ -37,27 +37,33 @@ const container = document.querySelector("#container");
 const display = document.querySelector("#display");
 container.addEventListener("click", (event) => {
   if (event.target.className === "number") {
-    currentNum += event.target.textContent;
-    display.textContent = currentNum;
-  } else if (event.target.className === "operator") {
-    if (event.target.textContent !== "=") {
-      operator = event.target.textContent;
-    }
-    console.log(typeof(operator))
-    if (firstNum === undefined) {
+    if (typeof(operator) === "undefined") {
+      currentNum += event.target.textContent;
       firstNum = Number(currentNum);
-      currentNum = "";
-    } else if (secondNum === undefined) {
+      display.textContent = firstNum;
+    } else {
+      currentNum += event.target.textContent;
       secondNum = Number(currentNum);
-      currentNum = "";
-      if (event.target.textContent = "=") {
-        display.textContent = operate(operator, firstNum, secondNum);
-      }
+      display.textContent = secondNum;
     }
-  } else if (event.target.className === "clear") {
-    display.textContent = 0;
+  } else if (event.target.className === "operator") {
+    if (typeof(operator) === "undefined") {
+      operator = event.target.textContent;
+      currentNum = "";
+    } else {
+      firstNum = operate(operator, firstNum, secondNum);
+      display.textContent = firstNum;
+      operator = event.target.textContent;
+      secondNum = undefined;
+      currentNum = "";
+    }
+  } else if (event.target.textContent === "=") {
+    display.textContent = operate(operator, firstNum, secondNum);
+  } else if (event.target.textContent === "C") {
     firstNum = undefined;
     secondNum = undefined;
     operator = undefined;
+    currentNum = "";
+    display.textContent = 0;
   }
 });
