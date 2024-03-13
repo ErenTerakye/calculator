@@ -21,13 +21,13 @@ function divide(firstNum, secondNum) {
 
 function operate(operator, firstNum, secondNum) {
   if (operator === "+") {
-    return firstNum + secondNum;
+    return add(firstNum, secondNum);
   } else if (operator === "-") {
-    return firstNum - secondNum;
+    return subtract(firstNum, secondNum);
   } else if (operator === "*") {
-    return firstNum * secondNum;
+    return multiply(firstNum, secondNum);
   } else if (operator === "/") {
-    return firstNum / secondNum;
+    return divide(firstNum, secondNum);
   } else {
     return "ERROR";
   }
